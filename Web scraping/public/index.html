@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>USER MANAGEMENT</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB"
+        crossorigin="anonymous">
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.10/angular.min.js"></script>
+    <script src="controller.js"></script>
+</head>
+
+<body ng-app="myapp">
+    <div class="container" ng-controller="userController">
+        <div class="row">
+            <div class="col-md-8">
+                <h2>USER MANAGEMENT</h2>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <button class="btn btn-sm btn-primary" ng-click="showCreate()">Create</button>
+                <div class="form-group" ng-show="show">
+                    <div class="row">
+                        <div class="col-md-1">
+                            <label>Name :</label>
+                        </div>
+                        <div class="col-md-4">
+                            <input type="text" ng-model="name" placeholder="Enter Your Name" />
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-1">
+                            <label>Email :</label>
+                        </div>
+                        <div class="col-md-4">
+                            <input type="email" ng-model="email" placeholder="Enter Your Email" />
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-1">
+                            <label>Company :</label>
+                        </div>
+                        <div class="col-md-4">
+                            <input type="text" ng-model="company" placeholder="Enter Your company" />
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-1">
+                            <label>Phone :</label>
+                        </div>
+                        <div class="col-md-4">
+                            <input type="text" ng-model="phone" placeholder="Enter Your Phone" />
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-1">
+                            <label>CCode :</label>
+                        </div>
+                        <div class="col-md-4">
+                            <input type="text" ng-model="countryCode" ng-disabled="true" value=countryCode/>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-1">
+                            <label>Zip :</label>
+                        </div>
+                        <div class="col-md-4">
+                            <input type="text" ng-model="zip" placeholder="Enter Your Zip" ng-minlength="1" ng-maxlength="6" />
+                        </div>
+                    </div>
+                    <div>
+                        <button class="btn btn-primary" ng-click="Create()">SUBMIT</button>
+                    </div>
+                </div>
+
+
+            </div>
+            <div class="col-md-6">
+                <input type="text" ng-model="searchText" placeholder="Search Name">
+                <button class="btn btn-sm btn-primary" style="padding-bottom:5px;" ng-click="search(searchText)">Search</button>
+            </div>
+        </div>
+        <div class="row">
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Phone</th>
+                        <th>Email</th>
+                        <th>Company</th>
+                        <th>ZIP</th>
+                        <th>ACTION</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-click="getUser(record)" ng-repeat="record in listUsers | filter:{name:searchText}">
+                        <td>{{record.name}}</td>
+                        <td>{{record.countryCode}}{{record.phone}}</td>
+                        <td>{{record.email}}</td>
+                        <td>{{record.company}}</td>
+                        <td>{{record.zip}}</td>
+                        <td>
+                            <span>
+                                <button class="btn btn-xs btn-danger" ng-click="deleteUser(record.email)">Delete</button>
+                            </span>
+                            <span></span>
+                            <span>
+                                <button class="btn btn-xs btn-info" ng-click="updateUser(record.email)">Update</button>
+                            </span>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</body>
+
+</html>
